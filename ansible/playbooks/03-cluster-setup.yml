@@ -1,0 +1,15 @@
+---
+# Full Kubernetes cluster setup (control-plane + workers)
+- name: Initialize Kubernetes Control Plane
+  hosts: control-plane
+  become: true
+  roles:
+    - role: kube-cluster
+      tags: control-plane
+
+- name: Join worker nodes to cluster
+  hosts: workers
+  become: true
+  roles:
+    - role: kube-cluster
+      tags: workers

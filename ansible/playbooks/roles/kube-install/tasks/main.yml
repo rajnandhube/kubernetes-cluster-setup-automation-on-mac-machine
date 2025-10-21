@@ -1,0 +1,58 @@
+---
+# Role: kube-install
+# Purpose: Install kubeadm, kubelet, kubectl, containerd
+
+- name: Ensure prerequisite packages are installed
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+      - lsb-release
+    state: present
+    update_cache: yes
+  tags: kube-install
+
+- name: Ensure /etc/apt/keyrings exists
+  file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: 0755
+  tags: kube-install
+
+- name: Remove old Kubernetes key file if exists
+  file:
+    path: /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+    state: absent
+  tags: kube-install
+
+- name: Download Kubernetes GPG key
+  shell: |
+    curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.33/deb/Release.key | gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+    chmod 644 /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+  args:
+    creates: /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+  tags: kube-install
+
+- name: Add Kubernetes APT repository
+  copy:
+    dest: /etc/apt/sources.list.d/kubernetes.list
+    content: |
+      deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.33/deb/ /
+  tags: kube-install
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+  tags: kube-install
+
+- name: Install Kubernetes components
+  apt:
+    name:
+      - kubeadm
+      - kubelet
+      - kubectl
+      - containerd
+    state: present
+  tags: kube-install

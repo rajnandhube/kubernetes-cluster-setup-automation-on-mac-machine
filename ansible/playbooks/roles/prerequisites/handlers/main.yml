@@ -1,0 +1,4 @@
+---
+# Handlers for prerequisites role
+- name: Apply sysctl
+  command: sysctl --system

@@ -1,0 +1,8 @@
+---
+# Install Kubernetes components on all nodes
+- name: Install Kubernetes components
+  hosts: all
+  become: true
+  roles:
+    - role: kube-install
+      tags: kube-install

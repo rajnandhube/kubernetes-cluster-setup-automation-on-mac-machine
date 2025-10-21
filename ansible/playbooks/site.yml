@@ -1,0 +1,8 @@
+---
+# Enterprise-ready site.yml to run full Kubernetes cluster setup
+# This allows CI/CD pipelines to run ansible-playbook -i inventory/hosts.ini playbooks/site.yml for a full cluster setup.
+
+
+- import_playbook: 01-prerequisites.yml
+- import_playbook: 02-install-kubernetes.yml
+- import_playbook: 03-cluster-setup.yml

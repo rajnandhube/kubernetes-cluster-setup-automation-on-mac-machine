@@ -1,0 +1,8 @@
+---
+# Configure Linux prerequisites for Kubernetes nodes
+- name: Configure prerequisites on all nodes
+  hosts: all
+  become: true
+  roles:
+    - role: prerequisites
+      tags: prerequisites
