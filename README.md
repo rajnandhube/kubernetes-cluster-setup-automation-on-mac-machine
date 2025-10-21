@@ -73,4 +73,5 @@ k8s-ansible/
 ```
 
 what is the use of handlers in ansible?
+
 In Ansible, handlers are special tasks that are triggered by other tasks when they report a change. They are typically used for actions that need to be performed only when something has changed, such as restarting a service after a configuration file has been modified. Example: Restarting a service (like kubelet) only if a configuration file changed.
