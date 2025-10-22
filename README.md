@@ -4,6 +4,7 @@ This lab demonstrates how to automate the setup of a Kubernetes cluster (1 contr
 
 1. Run terraform scripts to provision infrastructure (VMs) on your MAC machine using Multipass.
 ```
+cd terraform
 terraform init
 terraform plan -out=tfplan
 terraform apply tfplan --auto-approve
@@ -16,11 +17,13 @@ terraform apply tfplan --auto-approve
 
 3. Run `setup_multipass_env.sh` bash script to enable passwordless SSH access from your MAC to the provisioned VMs.
 ```bash
+cd ../
 ./setup_multipass_env.sh
 ```
 
 4. Use Ansible to install and configure Kubernetes on the provisioned VMs.
-``` 
+```
+cd ansible
 ansible-playbook -i inventory/hosts.ini playbooks/site.yml
 ```
 
