@@ -104,7 +104,7 @@
 
 # ===================== WORKER NODE TASKS =====================
 - name: "Workers: Join Kubernetes cluster"
-  shell: "{{ hostvars['control-plane']['join_command'] }} --ignore-preflight-errors=all"
+  shell: "{{ hostvars['controlplane']['join_command'] }} --ignore-preflight-errors=all"
   args:
     executable: /bin/bash
   when: "'workers' in group_names"

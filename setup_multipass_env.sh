@@ -11,7 +11,7 @@
 set -e
 
 # --- CONFIG ---
-VMS=("controlplane" "worker-node-1" "worker-node-2")
+VMS=("controlplane" "workernode-1" "workernode-2")
 SSH_KEY="$HOME/.ssh/id_rsa_ansible"
 SSH_PUB="$SSH_KEY.pub"
 

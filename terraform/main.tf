@@ -1,26 +1,45 @@
 
-resource "multipass_instance" "control-plane" {
+resource "multipass_instance" "controlplane" {
     name     = "controlplane"
-    cpus     = 4
-    memory   = "4G"
+    cpus     = 6
+    memory   = "6G"
     disk     = "30G"
-    image    = "25.04"
+    image    = "24.04"
 }
 
 resource "multipass_instance" "workernodes" {
-    count    = 2
-    name     = "worker-node-${count.index + 01}"
+    name     = "workernode-1"
     cpus     = 2
     memory   = "2G"
     disk     = "20G"
-    image    = "25.04"
+    image    = "24.04"
 }
 
+resource "multipass_instance" "workernodes1" {
+    name     = "workernode-2"
+    cpus     = 2
+    memory   = "2G"
+    disk     = "10G"
+    image    = "24.04"    
+}
+
+
+# Create 2 worker nodes using count
+# resource "multipass_instance" "workernodes" {
+#     count    = 2
+#     name     = "workernode-${count.index + 01}"
+#     cpus     = 2
+#     memory   = "2G"
+#     disk     = "20G"
+#     image    = "24.04"
+# }
+
+
 # resource "multipass_instance" "worker-nodes" {
-#     for_each = toset(["worker-node-01", "worker-node02"])
+#     for_each = toset(["workernode-01", "worker-node02"])
 #     name     = each.key
 #     cpus     = 2
 #     memory   = "2G"
 #     disk     = "20G"
-#     image    = "25.04"
+#     image    = "24.04"
 # }

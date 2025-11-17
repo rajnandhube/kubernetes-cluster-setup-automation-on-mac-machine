@@ -1,6 +1,14 @@
 # Kuberetes cluster setup automation using Terraform, Ansible & Bash script
 
-This lab demonstrates how to automate the setup of a Kubernetes cluster (1 controlplane + 2 workernodes) using Terraform for infrastructure provisioning, Ansible for configuration management, and Bash scripts for orchestration. The goal is to create a repeatable, reliable process for deploying Kubernetes clusters.
+This lab demonstrates how to automate the setup of a Kubernetes cluster (1 controlplane + 2 workernodes) on Mac M1 or newer chip using Terraform for infrastructure provisioning, Ansible for configuration management, and Bash scripts for orchestration. The goal is to create a repeatable, reliable process for deploying Kubernetes clusters.
+
+## Pre-requesite
+Install multipass, Terraform, Ansible using brew
+```
+brew install --cask multipass
+brew install ansible
+brew install terraform
+```
 
 1. Run terraform scripts to provision infrastructure (VMs) on your MAC machine using Multipass.
 ```
@@ -22,7 +30,7 @@ cd ../
 ```
 
 4. Use Ansible to install and configure Kubernetes on the provisioned VMs.
-```
+``` 
 cd ansible
 ansible-playbook -i inventory/hosts.ini playbooks/site.yml
 ```
@@ -76,5 +84,4 @@ k8s-ansible/
 ```
 
 what is the use of handlers in ansible?
-
 In Ansible, handlers are special tasks that are triggered by other tasks when they report a change. They are typically used for actions that need to be performed only when something has changed, such as restarting a service after a configuration file has been modified. Example: Restarting a service (like kubelet) only if a configuration file changed.
