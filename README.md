@@ -15,7 +15,7 @@ brew install terraform
 cd terraform
 terraform init
 terraform plan -out=tfplan
-terraform apply "tfplan" -auto-approve
+terraform apply -auto-approve tfplan
 ```
 2. Once the VMs are provisioned, Note down the IP addresses and VM names and update the `setup_multipass_env.sh` and `inventory/hosts.ini` files accordingly.
 
